@@ -19,7 +19,9 @@ def summation(n, term):
     True
     """
     assert n >= 1
-    "*** YOUR CODE HERE ***"
+    if n == 1:
+        return term(1)
+    return summation(n-1,term)+term(n)
 
 
 def paths(m, n):
@@ -36,7 +38,15 @@ def paths(m, n):
     1
     """
     "*** YOUR CODE HERE ***"
-
+    totalNumPath = 0
+    if m == 1 and n == 1:
+        return 1
+    if m > 1:
+        totalNumPath = paths(m-1,n) + totalNumPath
+    if n > 1:
+        totalNumPath = paths(m,n-1) + totalNumPath
+    
+    return totalNumPath
 
 def pascal(row, column):
     """Returns the value of the item in Pascal's Triangle
@@ -51,6 +61,11 @@ def pascal(row, column):
     6
     """
     "*** YOUR CODE HERE ***"
+    if column > row:
+        return 0
+    if column == 0 or row == column:
+        return 1
+    return pascal(row-1,column-1) + pascal(row-1,column)
 
 
 def double_eights(n):
@@ -74,4 +89,10 @@ def double_eights(n):
     >>> check(HW_SOURCE_FILE, 'double_eights', ['While', 'For'])
     True
     """
-    "*** YOUR CODE HERE ***"
+    if n < 10:
+        return False
+    elif ((n//10)% 10 == 8) and (n%10 == 8):
+        return True
+    return double_eights(n//10)
+    
+    
